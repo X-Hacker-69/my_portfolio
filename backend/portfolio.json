@@ -1,0 +1,110 @@
+{
+"personal_info": {
+    "name": "Anil Kumar Sharma",
+    "title": "Full Stack Developer & Computer Science Student at  Nims University Rajasthan",
+    "location": "Jaipur, India",
+    "email": "anilsharma02050@gmail.com",
+    "github": "https://github.com/X-Hacker-69",
+    "linkedin": "https://www.linkedin.com/in/anil-sharma-9a8749332/"
+  },
+  "about_me": "I'm Anil Kumar Sharma, a passionate BCA student with a deep interest in Cybersecurity & Ethical Hacking. I believe in understanding how systems break in order to build them better. With hands-on experience in Python, Java, C++, and modern web technologies, I bridge the gap between secure systems design and full-stack development. Every line of code I write considers both functionality and security posture.",
+  "skills": {
+    "languages": [
+      "Python",
+      "JavaScript",
+      "C++",
+      "Java",
+      "SQL"
+    ],
+    "frontend": [
+      "HTML",
+      "CSS",
+      "React.js"
+    ],
+    "backend": [
+      "FastAPI",
+      "Node.js",
+      "Django"
+    ],
+    "databases": [
+      "SQL",
+      "MongoDB"
+    ],
+    "devops": [
+      "Vercel",
+      "GitHub Actions"
+    ],
+    "currently_learning": [
+      "Rust",
+      "Data Science",
+      "Advance Excel",
+      "WebAssembly"
+    ]
+  },
+  "projects": [
+    {
+      "name": "Deepfake Detection System",
+      "description": "Production-grade AI system detecting AI-generated deepfake videos and images using ensemble deep learning models. Achieved 94.7% accuracy on FaceForensics++ benchmark.",
+      "tech": [
+        "Python",
+        "PyTorch",
+        "FastAPI",
+        "React"
+      ],
+      "highlights": [
+        "94.7% detection accuracy",
+        "Real-time analysis at 30fps",
+        "REST API <200ms latency"
+      ],
+      "github": "https://github.com/anilsharma/deepfake-detector",
+      "category": "AI/ML"
+    },
+    {
+      "name": "Advance Weather Web App",
+      "description": "Provides accurate weather data based on current search location",
+      "tech": [
+        "Next.js",
+        "React.js",
+        "OpenAI API",
+        "GitHub API"
+      ],
+      "highlights": [
+        "provide accurate weather data"
+      ],
+      "github": "https://github.com/X-Hacker-69/my_project.git",
+      "category": "Weather tools"
+    }
+  ],
+  "education": [
+    {
+      "degree": "Bachelors of Computer Application",
+      "institution": "Nims University Rajasthan",
+      "year": "2024 – 2027",
+      "gpa": "8.85 / 10",
+      "relevant_courses": [
+        "Machine Learning",
+        "Data Structures",
+        "Database Management",
+        "Algorithms",
+        "Cybersecurity Fundamentals"
+      ]
+    }
+  ],
+  "hackathons": [
+    {
+      "name": "University Smart India Hackathon 2025",
+      "result": "Promoted for further rounds",
+      "project": "AI-powered rural problem registration AI tool"
+    },
+    {
+      "name": "Aestr Alpha Hackathon, Jaipur",
+      "result": "Competed with national teams",
+      "project": "Deepfake Detection System"
+    }
+  ],
+  "contact": {
+    "email": "anilsharma02050@gmail.com",
+    "github": "https://github.com/X-Hacker-69",
+    "linkedin": "www.linkedin.com/in/anil-kumar-sharma-9a8749332"
+  }
+}

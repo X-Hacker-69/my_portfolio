@@ -1,0 +1,25 @@
+{
+  "texts": [
+    "Anil Kumar Sharma — Full Stack Developer & Computer Science Student at  Nims University Rajasthan\nI'm Anil Kumar Sharma, a passionate BCA student with a deep interest in Cybersecurity & Ethical Hacking. I believe in understanding how systems break in order to build them better. With hands-on experience in Python, Java, C++, and modern web technologies, I bridge the gap between secure systems design and full-stack development. Every line of code I write considers both functionality and security posture.",
+    "Skills: Languages: Python, JavaScript, C++, Java, SQL. Frontend: HTML, CSS, React.js. Backend: FastAPI, Node.js, Django. Databases: SQL, MongoDB. DevOps: Vercel, GitHub Actions. Currently learning: Rust, Data Science, Advance Excel, WebAssembly.",
+    "Project: Deepfake Detection System (AI/ML)\nProduction-grade AI system detecting AI-generated deepfake videos and images using ensemble deep learning models. Achieved 94.7% accuracy on FaceForensics++ benchmark.\nTech: Python, PyTorch, FastAPI, React\nHighlights: 94.7% detection accuracy; Real-time analysis at 30fps; REST API <200ms latency",
+    "Project: Advance Weather Web App (Weather tools)\nProvides accurate weather data based on current search location\nTech: Next.js, React.js, OpenAI API, GitHub API\nHighlights: provide accurate weather data",
+    "Education: Bachelors of Computer Application from Nims University Rajasthan (2024 – 2027), GPA 8.85 / 10. Courses: Machine Learning, Data Structures, Database Management, Algorithms, Cybersecurity Fundamentals.",
+    "Hackathon: University Smart India Hackathon 2025 — Promoted for further rounds. Project: AI-powered rural problem registration AI tool",
+    "Hackathon: Aestr Alpha Hackathon, Jaipur — Competed with national teams. Project: Deepfake Detection System",
+    "Contact Anil Kumar Sharma: email anilsharma02050@gmail.com, github https://github.com/X-Hacker-69, linkedin www.linkedin.com/in/anil-kumar-sharma-9a8749332"
+  ],
+  "sources": [
+    "about",
+    "skills",
+    "project:Deepfake Detection System",
+    "project:Advance Weather Web App",
+    "education",
+    "hackathon:University Smart India Hackathon 2025",
+    "hackathon:Aestr Alpha Hackathon, Jaipur",
+    "contact"
+  ],
+  "embed_model": "sentence-transformers/all-MiniLM-L6-v2",
+  "dim": 384,
+  "num_chunks": 8
+}
