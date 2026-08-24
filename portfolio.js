@@ -125,7 +125,7 @@ document.getElementById('btn-send').addEventListener('click', async () => {
   }
 
   try {
-    const res = await fetch('http://localhost:5000/send', {
+    const res = await fetch('https://my-portfolio-1-cgph.onrender.com/send', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({ name, email, subject, message })
