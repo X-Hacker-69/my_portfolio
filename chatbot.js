@@ -1,4 +1,4 @@
-const API_BASE = "http://localhost:5000";
+const API_BASE = "https://my-portfolio-1-cgph.onrender.com";
 const OWNER_FIRST = "Anil";
 const BOT_NAME    = "Anil AI";
 const AVATAR_INIT = "AS";
