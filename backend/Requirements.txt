@@ -1,30 +1,26 @@
-# Core Server & API
+# Core inference
 fastapi==0.111.0
 uvicorn[standard]==0.30.1
 pydantic==2.7.1
 python-dotenv==1.0.1
 
-# LLM Providers
+# LLM
+torch==2.5.1
+transformers==4.48.3
+accelerate==1.2.1
+sentencepiece==0.2.0
+
+# Fine-tuning
+peft==0.14.0
+trl==0.13.0
+datasets==3.2.0
+
+# RAG
+sentence-transformers==3.3.1
+faiss-cpu==1.9.0
+
+# Utilities
+numpy==1.26.4
+
+# Groq
 groq>=0.9.0
-
-# RAG & Embeddings
-sentence-transformers>=2.7.0
-faiss-cpu>=1.8.0
-numpy>=1.26.0
-
-# PyTorch (CPU version for Render Free Tier)
---extra-index-url https://download.pytorch.org/whl/cpu
-torch>=2.1.0
-
-# Transformer Pipeline (Minimal)
-transformers>=4.40.0
-accelerate>=0.29.0
-sentencepiece>=0.2.0
-
-# Optional: Fine-Tuning & Quantization 
-# WARNING: Remove or comment out the lines below if deploying on Render Free Tier.
-# Render CPU free tier will crash/timeout trying to build/run bitsandbytes & PEFT fine-tuning.
-# peft>=0.10.0
-# trl>=0.8.6
-# bitsandbytes>=0.43.0
-# datasets>=2.19.0
