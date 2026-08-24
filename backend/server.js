@@ -129,6 +129,7 @@ if (process.env.TWILIO_SID && process.env.TWILIO_AUTH) {
 //  4.  EXPRESS + MIDDLEWARE
 // ══════════════════════════════════════════════════════════════════════════════
 const app = express();
+app.set("trust proxy", 1);  // for rate-limiter behind reverse proxy
 
 app.use(cors({
   origin: (origin, cb) => {
@@ -150,17 +151,17 @@ app.use(express.json({ limit: "10kb" }));
 
 // ── Serve frontend ────────────────────────────────────────────────────────────
 // Priority: FRONTEND_DIR env var  →  ../frontend/public  →  ./public
-const frontendDir = FRONTEND_DIR
-  || path.join(__dirname, "..", "frontend", "public")
-  || path.join(__dirname, "public");
+// const frontendDir = FRONTEND_DIR
+//   || path.join(__dirname, "..", "frontend", "public")
+//   || path.join(__dirname, "public");
 
-if (require("fs").existsSync(frontendDir)) {
-  app.use(express.static(frontendDir));
-  console.log(`🌐 Serving frontend from: ${frontendDir}`);
-} else {
-  console.warn(`⚠️  Frontend folder not found: ${frontendDir}`);
-  console.warn("   Set FRONTEND_DIR in .env to your frontend folder path.");
-}
+// if (require("fs").existsSync(frontendDir)) {
+//   app.use(express.static(frontendDir));
+//   console.log(`🌐 Serving frontend from: ${frontendDir}`);
+// } else {
+//   console.warn(`⚠️  Frontend folder not found: ${frontendDir}`);
+//   console.warn("   Set FRONTEND_DIR in .env to your frontend folder path.");
+// }
 
 // ── Rate limiters ─────────────────────────────────────────────────────────────
 const chatLimiter = rateLimit({
