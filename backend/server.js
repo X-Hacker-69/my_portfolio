@@ -129,7 +129,7 @@ if (process.env.TWILIO_SID && process.env.TWILIO_AUTH) {
 //  4.  EXPRESS + MIDDLEWARE
 // ══════════════════════════════════════════════════════════════════════════════
 const app = express();
-app.set("trust proxy", 1);  // for rate-limiter behind reverse proxy
+app.set("trust proxy", true);  // for rate-limiter behind reverse proxy
 
 app.use(cors({
   origin: (origin, cb) => {
