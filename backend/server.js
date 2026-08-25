@@ -28,8 +28,8 @@ const Contact = require("./models/Contact");
 
 // ── Env config ────────────────────────────────────────────────────────────────
 const PORT         = process.env.PORT         || 5000;
-const PY_HOST      = process.env.PYTHON_HOST  || "localhost";
-const PY_PORT      = parseInt(process.env.PYTHON_PORT || "8000");
+const PY_HOST      = process.env.PYTHON_HOST  || "127.0.0.1";
+const PY_PORT      = Number(process.env.PYTHON_PORT || "8000");
 const PY_SCRIPT    = process.env.PYTHON_SCRIPT || path.join(__dirname, "inference_server.py");  // absolute path to inference_server.py
 const PY_EXEC      = process.env.PYTHON_EXEC  || (process.platform === "win32" ? path.join(__dirname, ".venv", "Scripts", "python.exe") : "python3"); // python / python3 / full venv path
 const FRONTEND_DIR = process.env.FRONTEND_DIR || path.join(__dirname, "..");           // absolute path to your frontend folder
@@ -129,7 +129,7 @@ if (process.env.TWILIO_SID && process.env.TWILIO_AUTH) {
 //  4.  EXPRESS + MIDDLEWARE
 // ══════════════════════════════════════════════════════════════════════════════
 const app = express();
-app.set("trust proxy", true);  // for rate-limiter behind reverse proxy
+app.set("trust proxy", 1);  // for rate-limiter behind reverse proxy
 
 app.use(cors({
   origin: (origin, cb) => {
@@ -275,16 +275,31 @@ app.post("/api/chat/stream", chatLimiter, (req, res) => {
     }
   );
 
-  pyReq.on("error", (err) => {
-    if (!res.headersSent) {
-      const msg = err.message.includes("ECONNREFUSED")
-        ? "AI server is still starting up. Please wait 30 seconds and try again."
-        : `AI server error: ${err.message}`;
-      return res.status(503).json({ error: msg });
-    }
-    res.write(`data: ${JSON.stringify({ error: "AI server disconnected" })}\n\n`);
-    res.end();
+ pyReq.on("error", (err) => {
+  console.error("❌ Python connection error:", {
+    code: err.code,
+    message: err.message,
+    syscall: err.syscall,
+    address: err.address,
+    port: err.port,
   });
+
+  if (!res.headersSent) {
+    const msg = err.message?.includes("ECONNREFUSED")
+      ? "AI server is still starting up. Please wait 30 seconds and try again."
+      : `AI server error: ${err.message || err.code || "Unknown error"}`;
+
+    return res.status(503).json({ error: msg });
+  }
+
+  res.write(
+    `data: ${JSON.stringify({
+      error: "AI server disconnected",
+    })}\n\n`
+  );
+
+  res.end();
+});
 
   pyReq.setTimeout(120_000, () => {
     pyReq.destroy();
