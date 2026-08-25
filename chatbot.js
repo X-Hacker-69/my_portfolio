@@ -193,69 +193,113 @@ function showError(raw) {
 // ── Streaming (SSE) ──────────────────────────────────
 async function sendStreaming(text) {
   const res = await fetch(`${API_BASE}/api/chat/stream`, {
-    method:  "POST",
-    headers: { "Content-Type": "application/json" },
-    body:    JSON.stringify({ message: text, history: history.slice(-10) }),
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json"
+    },
+    body: JSON.stringify({
+      message: text,
+      history: history.slice(-10)
+    })
   });
 
   if (!res.ok) {
     let errMsg = `HTTP ${res.status}`;
-    try { const j = await res.json(); errMsg = j.error || errMsg; } catch {}
+
+    try {
+      const j = await res.json();
+      errMsg = j.error || errMsg;
+    } catch {}
+
     throw new Error(errMsg);
   }
 
   hideTyping();
 
-  // Create streaming bubble
   const wrap = document.createElement("div");
   wrap.className = "msg ai";
-  const av  = document.createElement("div");
+
+  const av = document.createElement("div");
   av.className = "msg-av";
   av.textContent = AVATAR_INIT;
+
   const bub = document.createElement("div");
   bub.className = "bubble stream-cursor";
+
   wrap.appendChild(av);
   wrap.appendChild(bub);
   msgsEl.appendChild(wrap);
 
-  const reader  = res.body.getReader();
+  const reader = res.body.getReader();
   const decoder = new TextDecoder();
-  let fullText  = "";
+
+  let fullText = "";
 
   while (true) {
     const { done, value } = await reader.read();
+
     if (done) break;
 
-    for (const line of decoder.decode(value, { stream: true }).split("\n")) {
+    for (const line of decoder
+      .decode(value, { stream: true })
+      .split("\n")) {
+
       if (!line.startsWith("data:")) continue;
+
       const payload = line.slice(5).trim();
+
       if (payload === "[DONE]") {
         bub.classList.remove("stream-cursor");
         bub.innerHTML = renderMd(fullText);
-        history.push({ role: "assistant", content: fullText });
-        if (history.length > 20) history = history.slice(-20);
+
+        history.push({
+          role: "assistant",
+          content: fullText
+        });
+
+        if (history.length > 20) {
+          history = history.slice(-20);
+        }
+
         return;
       }
+
       try {
         const parsed = JSON.parse(payload);
-        if (parsed.error) throw new Error(parsed.error);
+
+        if (parsed.error) {
+          throw new Error(parsed.error);
+        }
+
         if (parsed.token) {
           fullText += parsed.token;
           bub.textContent = fullText;
           msgsEl.scrollTop = msgsEl.scrollHeight;
         }
+
       } catch (e) {
-        if (e.message !== "Unexpected token" && !e.message.startsWith("JSON")) throw e;
+        if (
+          e.message !== "Unexpected token" &&
+          !e.message.startsWith("JSON")
+        ) {
+          throw e;
+        }
       }
     }
   }
 
   bub.classList.remove("stream-cursor");
   bub.innerHTML = renderMd(fullText || "No response received.");
-  history.push({ role: "assistant", content: fullText });
-  if (history.length > 20) history = history.slice(-20);
-}
 
+  history.push({
+    role: "assistant",
+    content: fullText
+  });
+
+  if (history.length > 20) {
+    history = history.slice(-20);
+  }
+}
 // ── Non-streaming fallback ───────────────────────────
 async function sendRegular(text) {
   const res = await fetch(`${API_BASE}/api/chat`, {
