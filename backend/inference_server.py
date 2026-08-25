@@ -31,7 +31,7 @@ BASE_ARCH      = "microsoft/Phi-3-mini-4k-instruct"
 EMBED_MODEL    = "sentence-transformers/all-MiniLM-L6-v2"
 TOP_K          = 3
 MAX_NEW_TOKENS = 250
-PORT           = int(os.environ.get("PYTHON_PORT", 8000))
+PORT           = int(os.environ.get("PYTHON_PORT", "8000"))
 
 # ── Load .env ─────────────────────────────────────────────────────────────────
 for _env in [
