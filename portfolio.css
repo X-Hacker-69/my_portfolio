@@ -233,7 +233,7 @@ section{
   border:1px solid var(--border-glow);
   box-shadow:0 0 20px var(--neon-green);
   margin-bottom:10px;
-  position:relative;top:50%;left:40%;
+  position:relative;top:50%;left:35%;
   transform:translateY(-45%);
    animation:floatImage 3s ease-in-out infinite;
 }
@@ -803,32 +803,91 @@ footer{
 /* ============================================================
    RESPONSIVE
    ============================================================ */
-@media(max-width:900px){
-  .contact-grid{grid-template-columns:1fr;}
-}
-@media(max-width:680px){
-  nav{padding:14px 5%;}
-  .nav-links{
-    position:fixed;top:60px;left:0;right:0;
-    background:rgba(2,5,8,.97);
-    flex-direction:column;
-    padding:20px 5%;
-    gap:16px;
-    border-bottom:1px solid var(--border-glow);
-    transform:translateY(-100%);
-    opacity:0;
-    pointer-events:none;
-    transition:all var(--transition);
-    z-index:999;
+  /* Tablet Layout Adjustments (Max 900px) */
+@media (max-width: 900px) {
+  .contact-grid {
+    grid-template-columns: 1fr;
+    gap: 24px; /* Ensures items don't collapse tightly against each other */
   }
-  .nav-links.open{transform:none;opacity:1;pointer-events:all;}
-  .nav-toggle{display:flex;}
-  section{padding:80px 5%;}
-  .skills-grid{grid-template-columns:1fr;}
-  .projects-grid{grid-template-columns:1fr;}
-  #cursor,#cursor-ring{display:none;}
 }
 
+/* Mobile Devices & Android Phones (Max 680px) */
+@media (max-width: 680px) {
+  nav {
+    padding: 14px 5%;
+    position: relative; /* Establishes positioning context for absolute nav-links */
+  }
+
+  .nav-links {
+    position: fixed;
+    top: 100%; /* Dynamically anchors menu right under navbar */
+    left: 0;
+    right: 0;
+    background: rgba(2, 5, 8, 0.97);
+    -webkit-backdrop-filter: blur(12px); /* Blur background on iOS/Android */
+    backdrop-filter: blur(12px);
+    
+    display: flex; /* Ensures flex container behavior on mobile */
+    flex-direction: column;
+    padding: 24px 5%;
+    gap: 20px;
+    border-bottom: 1px solid var(--border-glow, rgba(255, 255, 255, 0.1));
+    
+    /* Off-screen state optimizations */
+    transform: translateY(-100%);
+    opacity: 0;
+    pointer-events: none;
+    visibility: hidden; /* Stops screen readers from focusing hidden links */
+    
+    /* Hardware-accelerated slide animation */
+    transition: transform var(--transition, 0.3s ease), 
+                opacity var(--transition, 0.3s ease), 
+                visibility var(--transition, 0.3s ease);
+    will-change: transform, opacity;
+    z-index: 999;
+    
+    /* Prevent overflow on short screen heights */
+    max-height: calc(100dvh - 100%);
+    overflow-y: auto;
+  }
+
+  .nav-links.open {
+    transform: translateY(0);
+    opacity: 1;
+    pointer-events: auto;
+    visibility: visible;
+  }
+
+  /* Increase tap target sizes for menu items */
+  .nav-links a {
+    display: block;
+    padding: 8px 0;
+    width: 100%;
+  }
+
+  .nav-toggle {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    -webkit-tap-highlight-color: transparent;
+  }
+
+  section {
+    padding: 60px 5%; /* Reduced top/bottom padding slightly for smaller screens */
+  }
+
+  .skills-grid,
+  .projects-grid {
+    grid-template-columns: 1fr;
+    gap: 20px;
+  }
+
+  #cursor,
+  #cursor-ring {
+    display: none !important;
+  }
+}
 /* ============================================================
    MISC UTILITIES
    ============================================================ */
